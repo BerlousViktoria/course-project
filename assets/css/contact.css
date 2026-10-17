@@ -1,0 +1,54 @@
+/* Banner of Contact Us Section */
+
+.page-banner{
+    width: 100%;
+    height: 220px;
+    background-image: url('../images/contact-us-banner.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    align-items: flex-end;
+}
+
+.page-banner-card{
+    background-color: #ffffff;
+    border-radius: 37px 37px 0px 0px;
+    height: 100px;
+    padding: 25px 35px 0 35px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.page-banner-card .title{
+    font-size: 2.125rem;
+}
+
+.page-banner-card .subtitle{
+    font-size: 1.375rem;
+}
+
+.page-banner-card a{
+    color: #4D5053;
+}
+
+/* Form Section */
+
+
+@media screen and (min-width: 1220px) {
+    .page-banner {
+        height: 356px;
+    }
+
+    .page-banner-card {
+        padding: 41px 78px 0 78px;
+    }
+
+    .page-banner-card .title {
+        font-size: 3.125rem;
+    }
+
+    .page-banner-card .subtitle {
+        font-size: 1.375rem;
+    }
+}
