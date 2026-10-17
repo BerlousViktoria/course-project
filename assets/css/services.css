@@ -1,0 +1,61 @@
+
+.page-banner {
+    width: 100%;
+    height: 220px;
+    background-image: url('../images/services-banner.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.page-banner-card {
+    background-color: #ffffff;
+    border-radius: 37px 37px 0px 0px;
+    padding: 25px 35px 0 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.page-banner-card .title {
+    font-size: 2.125rem;
+}
+
+.page-banner-card .subtitle {
+    font-size: 1.375rem;
+    margin-top: 5px;
+}
+
+.page-banner-card a {
+    color: var(--color-content);
+}
+
+
+@media screen and (min-width: 992px) {
+
+}
+
+@media screen and (min-width: 1220px) {
+    .page-banner {
+        height: 356px;
+        margin-bottom: 200px;
+    }
+
+    .page-banner-card {
+        height: 178px;
+        width: 504px;
+        padding: 41px 78px 0 78px;
+    }
+
+    .page-banner-card .title {
+        font-size: 3.125rem;
+    }
+
+    .contact-title .title{
+        font-size: 3.125rem;
+    }
+}
