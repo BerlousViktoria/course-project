@@ -1,4 +1,3 @@
-
 .page-banner {
     width: 100%;
     height: 220px;
@@ -34,15 +33,73 @@
     color: var(--color-content);
 }
 
+/* |-------------| Services Section |-------------| */
 
-@media screen and (min-width: 992px) {
+.services-section {
+    margin-top: 50px;
+    flex-direction: column;
+}
 
+.services-list {
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+}
+
+.service-card {
+    width: 100%;
+    max-width: 360px;
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+    padding: 30px 20px;
+    border-radius: 30px;
+}
+
+.service-card-title {
+    font-size: 1.5rem;
+    font-family: var(--font-family-heading);
+}
+
+.service-card-text {
+    font-size: 1.125rem;
+    color: var(--color-content);
+    line-height: 1.5;
+}
+
+.service-card-link {
+    margin-top: 15px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-dark);
+    gap: 10px;
+}
+
+.service-card--active {
+    background-color: var(--color-bright);
+    border-radius: 30px;
+    padding: 40px 20px;
+}
+
+/* |-------------| Media Query |-------------| */
+
+@media screen and (min-width: 768px) {
+    .services-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .service-card {
+        width: calc(50% - 20px);
+    }
 }
 
 @media screen and (min-width: 1220px) {
     .page-banner {
         height: 356px;
-        margin-bottom: 200px;
+        margin-bottom: 150px;
     }
 
     .page-banner-card {
@@ -55,7 +112,25 @@
         font-size: 3.125rem;
     }
 
-    .contact-title .title{
-        font-size: 3.125rem;
+    .services-section {
+        margin-top: 0;
     }
+
+    .services-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 40px 20px;
+    }
+
+    .service-card {
+        width: 360px;
+        max-width: 360px;
+        padding: 50px 30px;
+    }
+
+    .service-card--active {
+        border-radius: 37px;
+        padding: 50px 30px;
+    }    
 }
