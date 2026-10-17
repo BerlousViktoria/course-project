@@ -33,7 +33,109 @@
 }
 
 /* Form Section */
+/* |-------------| Form Section |-------------| */
 
+.contact-section {
+    margin-top: 50px;
+}
+
+.contact-title {
+    text-align: center;
+    max-width: 630px;
+    margin: 0 auto 40px auto;
+}
+
+.contact-wrapper {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+/* Ліва картка з контактами */
+.contact-card {
+    background-color: var(--color-bright);
+    border-radius: 30px;
+    padding: 35px 25px;
+    flex-direction: column;
+    width: 100%;
+    max-width: 360px;
+    gap: 30px;
+}
+
+.contact-card-info {
+    flex-direction: column;
+    gap: 25px;
+    font-style: normal;
+}
+
+.contact-card-item {
+    align-items: center;
+    gap: 15px;
+}
+
+.contact-card-item .icon-link {
+    flex-shrink: 0;
+    background-color: #ffffff;
+}
+
+.contact-card-item a {
+    font-family: var(--font-family-body);
+    font-size: 1.125rem;
+    color: var(--color-content);
+    word-break: break-word;
+}
+
+.contact-card .social-links {
+    justify-content: flex-start;
+    gap: 25px;
+    margin-top: 10px;
+}
+
+/* Форма звернення */
+.contact-form {
+    width: 100%;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.contact-form-row {
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+}
+
+.form-group {
+    width: 100%;
+    position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--color-dark);
+    padding: 12px 0;
+    font-family: var(--font-family-body);
+    font-size: 1.125rem;
+    color: var(--color-content);
+    background: transparent;
+    outline: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--color-content);
+    font-family: var(--font-family-body);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-btn {
+    align-self: center;
+}
 
 @media screen and (min-width: 1220px) {
     .page-banner {
