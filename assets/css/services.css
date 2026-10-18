@@ -38,6 +38,7 @@
 .services-section {
     margin-top: 50px;
     flex-direction: column;
+    margin-bottom: 80px;
 }
 
 .services-list {
@@ -93,6 +94,10 @@
 
     .service-card {
         width: calc(50% - 20px);
+    }
+
+    .services-section{
+        margin-bottom: 200px;
     }
 }
 
