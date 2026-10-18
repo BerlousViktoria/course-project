@@ -82,6 +82,67 @@
     padding: 40px 20px;
 }
 
+/* how we work section */
+
+.how-we-work-section, .how-we-work-header, .how-we-work-card-content, .how-we-work-card-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.how-we-work-section{
+    margin: 20px;
+    background-color: var(--color-bright);
+    border-radius: 70px;
+    padding-top: 80px;
+    margin-bottom: 80px;
+}
+
+.how-we-work-header{
+    text-align: center;
+}
+
+.how-we-work-card{
+    margin: 50px;
+}
+
+.how-we-work-card-header{
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 7.5rem;
+    margin-bottom: 40px;
+}
+
+.how-we-work-card-header img{    
+    width: 90px;
+    height: 90px;
+}
+
+.how-we-work-image{
+    display: none;
+}
+
+.how-we-work-number{
+    font-family: 'DM Serif Display', serif;
+    line-height: 1;
+}
+
+.how-we-work-card-content .subtitle{
+    max-height: 99px;
+    max-width: 456px;
+    min-width: 279px;
+    font-size: 1.375rem;
+}
+
+.how-we-work-title{
+    margin-bottom: 11px;
+    font-size: 2.1rem;
+}
+
+.how-we-work-card--reverse{
+    flex-direction: row-reverse;
+}
+
 /* |-------------| Media Query |-------------| */
 
 @media screen and (min-width: 768px) {
@@ -99,6 +160,41 @@
     .services-section{
         margin-bottom: 200px;
     }
+
+    .how-we-work-section{
+        margin: 0 auto;
+        padding-top: 160px;
+        padding-bottom: 160px;
+        margin-bottom: 200px;
+    }
+
+    .how-we-work-section .subtitle{
+        max-width: 802px;
+    }
+
+    .how-we-work-header{
+        text-align: center;
+        margin-bottom: 100px;
+    }
+
+    .how-we-work-card{
+        margin: 0 116px 70px;
+        gap: 51px;
+    }
+
+    .how-we-work-card-header{
+        margin-bottom: 58px; 
+    }    
+
+    .how-we-work-image {
+        display: block;
+        width: 452px;
+        height: 485px;
+        flex-shrink: 0;
+        object-fit: cover;
+    }
+
+
 }
 
 @media screen and (min-width: 1220px) {
