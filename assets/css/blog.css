@@ -130,7 +130,6 @@
 
 .blog-card-image{
     width: 360px;
-    /* виправити */
 }
 
 .blog-section{
@@ -177,6 +176,36 @@
     border-radius: 8px 8px 8px 0px;
     color: var(--color-content);
     font-family: var(--font-family-body);
+}
+
+/* blog navigation */
+
+.navigation{
+    margin-top: 51px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.navigation-item{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;    
+    width: 52px;
+    height: 52px;
+    border: 1px solid #CDA274;
+    border-radius: 50%;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--color-dark);
+    margin-bottom: 200px;
+}
+
+.navigation-item.active{
+    background-color: var(--color-bright);
+    border-color: #F4F0EC;
+    color: var(--color-dark, #292F36);      
 }
 
 @media screen and (min-width: 992px){
