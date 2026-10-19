@@ -108,6 +108,7 @@
     filter: drop-shadow(0px 10px 30px rgba(255, 255, 255, 0.25));
     border-radius: 62px;       
     padding: 21px; 
+    background-color: #fff;
     /* чекнути */
 }
 
@@ -196,6 +197,15 @@
     .latest-post-section-container .title {
         text-align: left;
     }    
+
+    .blog-grid{
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 20px;                             
+        width: 820px;
+        margin: 0 auto;
+    }
 }
 
 
@@ -220,4 +230,28 @@
     .page-banner-card .title {
         font-size: 3.125rem;
     }
+
+    .blog-section{
+        margin-top: 200px;
+        text-align: left;
+    }
+
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;                            
+        width: 100%;
+        max-width: 1200px;                    
+        margin: 0 auto;                       
+    }
+
+    .blog-card {
+        box-sizing: border-box;
+        width: 100%;                          
+    }
+
+    .blog-card-image img{
+        width: 340px;
+        height: 289px;
+    }    
 }
