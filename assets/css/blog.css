@@ -252,27 +252,28 @@
 
 @media screen and (min-width: 1220px) {
 
-    .latest-post-section-container{
-        margin: 0 auto;
-        max-width: 1201px;
-    }
-
+    
     .page-banner {
         height: 356px;
         margin-bottom: 200px;
     }
-
+    
     .page-banner-card {
         height: 178px;
         width: 504px;
         padding: 41px 78px 0 78px;
     }
-
+    
     .page-banner-card .title {
         font-size: 3.125rem;
         text-align: left;
     }
-
+    
+    .latest-post-section-container{
+        margin: 0 auto;
+        max-width: 1201px;
+    }
+    
     .blog-section {
         align-items: flex-start;
         width: 1200px;
