@@ -121,6 +121,7 @@ ul{
     flex-direction: column;
     background-color:var(--color-bright);
     color: var(--color-dark);
+    z-index: 1;
 }
 .main-menu.menu-open{
     left: 0;

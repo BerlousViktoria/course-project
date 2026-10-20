@@ -3,23 +3,40 @@ const iconOpen = document.getElementById('iconOpen');
 const iconClose = document.getElementById('iconClose');
 const mainMenu = document.getElementById('mainMenu');
 
-iconBlock.addEventListener('click', () => (
-    iconOpen.classList.toggle('d-none'),
-    iconClose.classList.toggle('d-none'),
-    mainMenu.classList.toggle('menu-open')
-))
+if (iconBlock && mainMenu) {
+    iconBlock.addEventListener('click', () => {
+        mainMenu.classList.toggle('menu-open');
+        
+        if (iconOpen && iconClose) {
+            iconOpen.classList.toggle('d-none');
+            iconClose.classList.toggle('d-none');
+        }
+    });
+}
 
 const loginBtn = document.getElementById('loginBtn');
 const closeModal = document.getElementById('closeModal');
 const modal = document.getElementById('modal');
 
-loginBtn.addEventListener('click', () => (
-    modal.classList.remove('d-none')
-))
+if (loginBtn && modal) {
+    loginBtn.addEventListener('click', () => {
+        modal.classList.remove('d-none');
+    });
+}
 
-closeModal.addEventListener('click', () => (
-    modal.classList.add('d-none')
-))
+if (closeModal && modal) {
+    closeModal.addEventListener('click', () => {
+        modal.classList.add('d-none');
+    });
+}
+
+if (modal) {
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('d-none');
+        }
+    });
+}
 
 
 const animatedItems = document.querySelectorAll('.fade');
