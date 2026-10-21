@@ -49,102 +49,39 @@
         </section>
 
 
-        <section class="project-filter d-flex">
-            <a href="#" class="filter-item">Ванна кімната</a>
-            <a href="#" class="filter-item active">Спальня</a>
-            <a href="#" class="filter-item">Кухня</a>
-            <a href="#" class="filter-item">Вітальня</a>
+        <section class="project-controls content-wrap d-flex">
+            <div class="search-box">
+                <input type="text" placeholder="Пошук за назвою.." id="searchInput">
+            </div>
+
+
+            <div class="project-filter d-flex" id="categoryFilters">
+                <button type="button" class="filter-item active" data-category="all">Усі</button>
+                <button type="button" class="filter-item" data-category="bathroom">Ванна кімната</button>
+                <button type="button" class="filter-item" data-category="bedroom">Спальня</button>
+                <button type="button" class="filter-item" data-category="kitchen">Кухня</button>
+                <button type="button" class="filter-item" data-category="living-room">Вітальня</button>
+            </div>
+
+            <div class="sort-box">
+                <select id="sortSelect">
+                <option value="default">За замовчуванням</option>
+                <option value="title-asc">За назвою (А-Я)</option>
+                <option value="title-desc">За назвою (Я-А)</option>
+                <option value="date-desc">Спочатку найновіші</option>
+                <option value="date-asc">Спочатку найстаріші</option>
+                </select>
+            </div>
         </section>
+
               
+        <div id="noResults" class="no-results content-wrap d-none">
+            <h3>За заданими параметрами записи відсутні</h3>
+            <p>Спробуйте змінити пошуковий запит або вибрати іншу категорію.</p>
+        </div>
 
-
-        <section class="projects-section-container d-flex">
-            <div class="projects-column d-flex">
-                <article class="project-item">
-                    <img src="assets/images/projects-photo-1.png" alt="Фотографія спальні">
-                    <div class="project-item-info">
-                        <div class="project-item-desc">
-                            <h3 class="title">Мінімалістична Спальня</h3>
-                            <p class="subtitle">Декор / Архітектра</p>
-                        </div>
-                        <a href="#" class="icon-link project-link d-flex item-center"><img src="assets/images/icons/arrow-right-icon.svg" alt="button" class="arrow-right-btn"></a>
-                    </div> 
-                </article>
-                <article class="project-item">
-                    <img src="assets/images/projects-photo-3.png" alt="Фотографія спальні">
-                    <div class="project-item-info">
-                        <div class="project-item-desc">
-                            <h3 class="title">Мінімалістична Спальня</h3>
-                            <p class="subtitle">Декор / Архітектра</p>
-                        </div>
-                        <a href="#" class="icon-link project-link d-flex item-center"><img src="assets/images/icons/arrow-right-icon.svg" alt="button" class="arrow-right-btn"></a>
-                    </div> 
-                </article>
-                <article class="project-item">
-                    <img src="assets/images/projects-photo-5.png" alt="Фотографія спальні">
-                    <div class="project-item-info">
-                        <div class="project-item-desc">
-                            <h3 class="title">Мінімалістична Спальня</h3>
-                            <p class="subtitle">Декор / Архітектра</p>
-                        </div>
-                        <a href="#" class="icon-link project-link d-flex item-center"><img src="assets/images/icons/arrow-right-icon.svg" alt="button" class="arrow-right-btn"></a>
-                    </div> 
-                </article>
-                <article class="project-item">
-                    <img src="assets/images/projects-photo-7.png" alt="Фотографія спальні">
-                    <div class="project-item-info">
-                        <div class="project-item-desc">
-                            <h3 class="title">Мінімалістична Спальня</h3>
-                            <p class="subtitle">Декор / Архітектра</p>
-                        </div>
-                        <a href="#" class="icon-link project-link d-flex item-center"><img src="assets/images/icons/arrow-right-icon.svg" alt="button" class="arrow-right-btn"></a>
-                    </div> 
-                </article>                                                
-            </div> 
-            <div class="projects-column d-flex">
-                <article class="project-item">
-                    <img src="assets/images/projects-photo-2.png" alt="Фотографія спальні">
-                    <div class="project-item-info">
-                        <div class="project-item-desc">
-                            <h3 class="title">Мінімалістична Спальня</h3>
-                            <p class="subtitle">Декор / Архітектра</p>
-                        </div>
-                        <a href="#" class="icon-link project-link d-flex item-center"><img src="assets/images/icons/arrow-right-icon.svg" alt="button" class="arrow-right-btn"></a>
-                    </div> 
-                </article>
-                <article class="project-item">
-                    <img src="assets/images/projects-photo-4.png" alt="Фотографія спальні">
-                    <div class="project-item-info">
-                        <div class="project-item-desc">
-                            <h3 class="title">Мінімалістична Спальня</h3>
-                            <p class="subtitle">Декор / Архітектра</p>
-                        </div>
-                        <a href="#" class="icon-link project-link d-flex item-center"><img src="assets/images/icons/arrow-right-icon.svg" alt="button" class="arrow-right-btn"></a>
-                    </div> 
-                </article>
-                <article class="project-item">
-                    <img src="assets/images/projects-photo-6.png" alt="Фотографія спальні">
-                    <div class="project-item-info">
-                        <div class="project-item-desc">
-                            <h3 class="title">Мінімалістична Спальня</h3>
-                            <p class="subtitle">Декор / Архітектра</p>
-                        </div>
-                        <a href="#" class="icon-link project-link d-flex item-center"><img src="assets/images/icons/arrow-right-icon.svg" alt="button" class="arrow-right-btn"></a>
-                    </div> 
-                </article>
-                <article class="project-item">
-                    <img src="assets/images/projects-photo-8.png" alt="Фотографія спальні">
-                    <div class="project-item-info">
-                        <div class="project-item-desc">
-                            <h3 class="title">Мінімалістична Спальня</h3>
-                            <p class="subtitle">Декор / Архітектра</p>
-                        </div>
-                        <a href="#" class="icon-link project-link d-flex item-center"><img src="assets/images/icons/arrow-right-icon.svg" alt="button" class="arrow-right-btn"></a>
-                    </div> 
-                </article>                                                
-            </div>                       
-
-            
+        <section class="projects-section-container d-flex" id="projectsContainer">
+        
         </section>
 
         <nav class="navigation d-flex" aria-label="Навігація сторінками">
