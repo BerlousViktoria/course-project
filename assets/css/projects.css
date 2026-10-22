@@ -35,15 +35,6 @@
 
 /* projects filter */
 
-
-
-
-
-
-/* project controls */
-
-
-
 /* project filter controls */
 
 .project-controls {
@@ -125,8 +116,6 @@
     color: var(--color-dark);
     font-weight: bold;
 }
-
-
 
 /* projects navigation */
 
