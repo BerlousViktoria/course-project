@@ -132,3 +132,108 @@ const projectsData = [
         date: "2023-10-12"
     }
 ];
+
+// 1. Поточний стан (Single Source of Truth)
+const state = {
+    projects: projectsData, // Початковий масив проєктів
+    filter: 'all',
+    search: '',
+    sort: 'default'
+};
+
+// 2. Чиста функція фільтрації та сортування
+function filterProjects(list, { filter, search, sort }) {
+    if (!list) return [];
+
+    return list
+        .filter(item => filter === 'all' || item.category === filter)
+        .filter(item => {
+            const query = (search || '').toLowerCase().trim();
+            return item.title.toLowerCase().includes(query) || item.subtitle.toLowerCase().includes(query);
+        })
+        .sort((a, b) => {
+            if (sort === 'title-asc') return a.title.localeCompare(b.title, 'uk');
+            if (sort === 'title-desc') return b.title.localeCompare(a.title, 'uk');
+            if (sort === 'date-desc') return new Date(b.date) - new Date(a.date);
+            if (sort === 'date-asc') return new Date(a.date) - new Date(b.date);
+            return a.id - b.id;
+        });
+}
+
+// Допоміжна функція генерації HTML колонок
+function createColumnHTML(columnProjects) {
+    if (!columnProjects || columnProjects.length === 0) return '';
+
+    const cardsHTML = columnProjects.map(project => `
+        <article class="project-item" data-id="${project.id}">
+            <img src="${project.image}" alt="${project.title}">
+            <div class="project-item-info">
+                <div class="project-item-desc">
+                    <h3 class="title">${project.title}</h3>
+                    <p class="subtitle">${project.subtitle}</p>
+                </div>
+                <a href="#" class="icon-link project-link d-flex item-center" aria-label="Переглянути проєкт ${project.title}">
+                    <img src="assets/images/icons/arrow-right-icon.svg" alt="Стрілка переходу" class="arrow-right-btn">
+                </a>
+            </div> 
+        </article>
+    `).join('');
+
+    return `<div class="projects-column d-flex">${cardsHTML}</div>`;
+}
+
+function renderUI() {
+    const container = document.getElementById('projectsContainer');
+    const noResults = document.getElementById('noResults');
+
+    if (!container) return; 
+
+    const visibleProjects = filterProjects(state.projects, state);
+
+    if (visibleProjects.length === 0) {
+        container.innerHTML = '';
+        if (noResults) noResults.classList.remove('d-none');
+        return;
+    }
+
+    if (noResults) noResults.classList.add('d-none');
+
+    const leftColumn = visibleProjects.filter((_, index) => index % 2 === 0);
+    const rightColumn = visibleProjects.filter((_, index) => index % 2 !== 0);
+
+    container.innerHTML = createColumnHTML(leftColumn) + createColumnHTML(rightColumn);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const categoryFilters = document.getElementById('categoryFilters');
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+
+    if (categoryFilters) {
+        categoryFilters.addEventListener('click', (e) => {
+            const btn = e.target.closest('.filter-item');
+            if (!btn) return;
+
+            categoryFilters.querySelectorAll('.filter-item').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            state.filter = btn.dataset.category || 'all';
+            renderUI();
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            state.search = e.target.value;
+            renderUI();
+        });
+    }
+
+    if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+            state.sort = e.target.value;
+            renderUI();
+        });
+    }
+    renderUI();
+});
