@@ -112,6 +112,10 @@
     margin-top: 10px;
 }
 
+.social-icon{
+    color: black;
+}
+
 .contact-form {
     width: 100%;
     display: flex;
@@ -158,6 +162,11 @@
 .contact-btn {
     align-self: center;
 }
+
+.btn.contact-btn svg{
+    color: var(--color-summary-text);
+}
+
 
 /* |-------------| Media Query |-------------| */
 

@@ -32,6 +32,11 @@
     color: var(--color-content);
 }
 
+
+#loginBtn svg{
+    color: #CDA274;
+}
+
 /* Services Section */
 
 .services-section{

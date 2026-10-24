@@ -191,7 +191,7 @@ function createCard(project) {
         </div>
         <a href="#" class="icon-link project-link d-flex item-center"
            aria-label="Переглянути проєкт ${project.title}">
-          <img src="assets/images/icons/arrow-right-icon.svg" alt="" class="arrow-right-btn">
+          <svg width="10" height="20" class="arrow-right-btn"><use href="assets/images/icons/sprite.svg#arrow-right-icon"></use></svg>
         </a>
       </div>
     </article>
