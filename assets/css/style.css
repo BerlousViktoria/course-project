@@ -349,6 +349,10 @@ ul{
     cursor: pointer;
 }
 
+.incorrect-form{
+    color: rgb(173, 12, 12);
+}
+
 /* |-------------| Media Query |-------------| */
 
 @media screen and (min-width: 1220px) {

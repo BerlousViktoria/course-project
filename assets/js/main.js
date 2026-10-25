@@ -55,3 +55,47 @@ const scrollObserver = new IntersectionObserver(
 animatedItems.forEach((item) => {
   scrollObserver.observe(item);
 });
+
+
+// modal check
+
+const form = document.getElementById("modal-form");
+const username = document.getElementById("username");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+
+const incorrectUsername = document.getElementById("incorrectUsername");
+const incorrectEmail = document.getElementById("incorrectEmail");
+const incorrectPassword = document.getElementById("incorrectPassword");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  let isValid = true;
+
+  if (!username.checkValidity()) {
+    incorrectUsername.classList.remove("d-none");
+    isValid = false;
+  } else {
+    incorrectUsername.classList.add("d-none");
+  }
+
+  if (!email.checkValidity()) {
+    incorrectEmail.classList.remove("d-none");
+    isValid = false;
+  } else {
+    incorrectEmail.classList.add("d-none");
+  }
+
+  const specialCharRegex = /[-=\/?]/;
+  if (!specialCharRegex.test(password.value)) {
+    incorrectPassword.classList.remove("d-none");
+    isValid = false;
+  } else {
+    incorrectPassword.classList.add("d-none");
+  }
+
+  if (isValid) {
+    console.log("Форма успішно пройшла перевірку!");
+  }
+});
