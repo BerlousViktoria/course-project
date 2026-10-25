@@ -1,0 +1,96 @@
+            
+            <article class="blog-card">
+                <div class="blog-card-image-wrap">
+                    <img src="assets/images/news-photo-1.png" alt="Сучасна світла кухня з барною стійкою" class="blog-card-image">
+                    <span class="blog-card-badge">Дизайн кухні</span>
+                </div>
+                <h3 class="blog-card-title">
+                    <a href="#">Сучасні рішення для проєктування та ремонту затишної кухні</a>
+                </h3>
+                <div class="blog-card-footer d-flex item-center">
+                    <time datetime="2022-12-26" class="subtitle">26 грудня, 2022</time>
+                    <a href="#" class="icon-link d-flex item-center" aria-label="Читати детальніше">
+                        <svg width="10" height="18"><use href="assets/images/icons/sprite.svg#arrow-right-icon"></use></svg>
+                    </a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-image-wrap">
+                    <img src="assets/images/news-photo-2.png" alt="Світла вітальня та коридор з дерев'яним оздобленням" class="blog-card-image">
+                    <span class="blog-card-badge">Житловий простір</span>
+                </div>
+                <h3 class="blog-card-title">
+                    <a href="#">Бюджетні та актуальні дизайнерські ідеї для оновлення вітальні</a>
+                </h3>
+                <div class="blog-card-footer d-flex item-center">
+                    <time datetime="2022-12-22" class="subtitle">22 грудня, 2022</time>
+                    <a href="#" class="icon-link d-flex item-center" aria-label="Читати детальніше">
+                        <svg width="10" height="18"><use href="assets/images/icons/sprite.svg#arrow-right-icon"></use></svg>
+                    </a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-image-wrap">
+                    <img src="assets/images/news-photo-3.png" alt="Мінімалістична робоча зона в офісі" class="blog-card-image">
+                    <span class="blog-card-badge">Дизайн інтер'єру</span>
+                </div>
+                <h3 class="blog-card-title">
+                    <a href="#">Найкращі практичні рішення для створення сучасних бізнес-просторів</a>
+                </h3>
+                <div class="blog-card-footer d-flex item-center">
+                    <time datetime="2022-12-25" class="subtitle">25 грудня, 2022</time>
+                    <a href="#" class="icon-link d-flex item-center" aria-label="Читати детальніше">
+                        <svg width="10" height="18"><use href="assets/images/icons/sprite.svg#arrow-right-icon"></use></svg>
+                    </a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-image-wrap">
+                    <img src="assets/images/news-photo-4.png" alt="Світла кухня у скандинавському стилі" class="blog-card-image">
+                    <span class="blog-card-badge">Дизайн кухні</span>
+                </div>
+                <h3 class="blog-card-title">
+                    <a href="#">Як ергономічно спланувати кухонну зону та підібрати освітлення</a>
+                </h3>
+                <div class="blog-card-footer d-flex item-center">
+                    <time datetime="2022-12-26" class="subtitle">26 грудня, 2022</time>
+                    <a href="#" class="icon-link d-flex item-center" aria-label="Читати детальніше">
+                        <svg width="10" height="18"><use href="assets/images/icons/sprite.svg#arrow-right-icon"></use></svg>
+                    </a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-image-wrap">
+                    <img src="assets/images/news-photo-5.png" alt="Затишна зона відпочинку з диваном та кріслом" class="blog-card-image">
+                    <span class="blog-card-badge">Житловий простір</span>
+                </div>
+                <h3 class="blog-card-title">
+                    <a href="#">Поєднання текстилю та пастельних відтінків для максимального затишку</a>
+                </h3>
+                <div class="blog-card-footer d-flex item-center">
+                    <time datetime="2022-12-22" class="subtitle">22 грудня, 2022</time>
+                    <a href="#" class="icon-link d-flex item-center" aria-label="Читати детальніше">
+                        <svg width="10" height="18"><use href="assets/images/icons/sprite.svg#arrow-right-icon"></use></svg>
+                    </a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-card-image-wrap">
+                    <img src="assets/images/news-photo-6.png" alt="Обідня зона та острів у білих тонах" class="blog-card-image">
+                    <span class="blog-card-badge">Дизайн інтер'єру</span>
+                </div>
+                <h3 class="blog-card-title">
+                    <a href="#">Стильні тенденції вибору натуральних матеріалів для вашого дому</a>
+                </h3>
+                <div class="blog-card-footer d-flex item-center">
+                    <time datetime="2022-12-25" class="subtitle">25 грудня, 2022</time>
+                    <a href="#" class="icon-link d-flex item-center" aria-label="Читати детальніше">
+                        <svg width="10" height="18"><use href="assets/images/icons/sprite.svg#arrow-right-icon"></use></svg>
+                    </a>
+                </div>
+            </article>
