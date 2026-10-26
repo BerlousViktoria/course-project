@@ -70,19 +70,14 @@ const incorrectPassword = document.getElementById("incorrectPassword");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-
-  let isValid = true;
-
   if (!username.checkValidity()) {
     incorrectUsername.classList.remove("d-none");
-    isValid = false;
   } else {
     incorrectUsername.classList.add("d-none");
   }
 
   if (!email.checkValidity()) {
     incorrectEmail.classList.remove("d-none");
-    isValid = false;
   } else {
     incorrectEmail.classList.add("d-none");
   }
@@ -90,12 +85,7 @@ form.addEventListener("submit", (e) => {
   const specialCharRegex = /[-=\/?]/;
   if (!specialCharRegex.test(password.value)) {
     incorrectPassword.classList.remove("d-none");
-    isValid = false;
   } else {
     incorrectPassword.classList.add("d-none");
-  }
-
-  if (isValid) {
-    console.log("Форма успішно пройшла перевірку!");
   }
 });

@@ -1,22 +1,12 @@
-// ---- page PROJECTS: ----
-// -- filtering, searching, sorting and pagination --
+// ---- page PROJECTS (9-12 балів: Асинхронне завантаження з JSON) ----
 
-const projectsData = [
-    { id: 1, title: "Сучасна затишна спальня", category: "bedroom", subtitle: "Декор / Архітектура", image: "assets/images/projects-photo-1.png", date: "2024-03-15" },
-    { id: 2, title: "Мінімалістична спальня", category: "bedroom", subtitle: "Декор / Архітектура", image: "assets/images/projects-photo-2.png", date: "2024-02-10" },
-    { id: 3, title: "Класична ванна кімната", category: "bathroom", subtitle: "Декор / Архітектура", image: "assets/images/projects-photo-3.png", date: "2024-01-20" },
-    { id: 4, title: "Світла спальна зона", category: "bedroom", subtitle: "Декор / Архітектура", image: "assets/images/projects-photo-4.png", date: "2023-11-05" },
-    { id: 5, title: "Сучасна кухня-їдальня", category: "kitchen", subtitle: "Декор / Архітектура", image: "assets/images/projects-photo-5.png", date: "2024-04-01" },
-    { id: 6, title: "Ергономічна кухня", category: "kitchen", subtitle: "Декор / Архітектура", image: "assets/images/projects-photo-6.png", date: "2023-12-18" },
-    { id: 7, title: "Простора вітальня", category: "living-room", subtitle: "Декор / Архітектура", image: "assets/images/projects-photo-7.png", date: "2024-02-28" },
-    { id: 8, title: "Затишна зона відпочинку", category: "living-room", subtitle: "Декор / Архітектура", image: "assets/images/projects-photo-8.png", date: "2023-10-12" },
-];
+let projectsData = [];
 
 let currentFilter = "all";
 let currentSearch = "";
 let currentSort = "default";
-let currentPage = 1;      // Поточна сторінка пагінації
-const itemsPerPage = 4;   // Кількість проєктів на одній сторінці
+let currentPage = 1; 
+const itemsPerPage = 4;
 
 const container = document.getElementById("projectsContainer");
 const noResults = document.getElementById("noResults");
@@ -26,21 +16,43 @@ const sortSelect = document.getElementById("sortSelect");
 const paginationBtns = document.querySelectorAll(".navigation-item[data-page]");
 const nextBtn = document.getElementById("nextBtn");
 
-// 1. Фільтрація за категорією
+async function loadProjectsData() {
+  if (!container) return;
+
+  container.innerHTML = `<p class="loading-message" style="text-align: center; width: 100%;">Завантаження проєктів...</p>`;
+
+  try {
+    const response = await fetch('assets/data/projects.json');
+
+    if (!response.ok) {
+      throw new Error(`Помилка мережі: ${response.status}`);
+    }
+
+    projectsData = await response.json();
+
+    updatePage();
+
+  } catch (error) {
+    console.error("Не вдалося завантажити дані:", error);
+    container.innerHTML = `
+      <p class="error-message" style="color: red; text-align: center; width: 100%;">
+        Виникла помилка під час завантаження даних. Будь ласка, спробуйте пізніше.
+      </p>
+    `;
+  }
+}
+
 function filterByCategory(list, category) {
   if (category === "all") return list;
   return list.filter(project => project.category === category);
 }
 
-// 2. Пошук за назвою
 function searchByTitle(list, text) {
   const query = text.toLowerCase().trim();
   return list.filter(project => project.title.toLowerCase().includes(query));
 }
 
-// 3. Сортування
 function sortProjects(list, sortType) {
-  // Робимо копію масиву через .slice(), щоб не мутувати оригінальний масив при сортуванні
   const sortedList = list.slice();
   
   if (sortType === "title-asc") {
@@ -57,7 +69,6 @@ function sortProjects(list, sortType) {
   return sortedList;
 }
 
-// 4. Генерація HTML для однієї картки
 function createCard(project) {
   return `
     <article class="project-item" data-id="${project.id}">
@@ -76,7 +87,6 @@ function createCard(project) {
   `;
 }
 
-// 5. Виведення проєктів на сторінку з урахуванням пагінації та колонок
 function showProjects(list) {
   if (!container) return;
 
@@ -88,7 +98,6 @@ function showProjects(list) {
 
   if (noResults) noResults.classList.add("d-none");
 
-  // Застосовуємо формулу пагінації
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedList = list.slice(startIndex, endIndex);
@@ -112,7 +121,6 @@ function showProjects(list) {
 
   container.innerHTML = html;
 }
-
 
 function updateActivePagination() {
   paginationBtns.forEach(btn => {
@@ -186,4 +194,4 @@ if (nextBtn) {
   });
 }
 
-updatePage();
+loadProjectsData();
