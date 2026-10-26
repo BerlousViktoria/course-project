@@ -60,6 +60,8 @@ function renderBlog(pageNumber) {
         `;
         blogGrid.insertAdjacentHTML('beforeend', cardHTML);
     });
+
+    updateActiveButton();
 }
 
 function updateActiveButton() {
