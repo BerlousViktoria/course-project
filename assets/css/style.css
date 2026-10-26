@@ -68,7 +68,7 @@ body{
 }
 
 .d-none{
-    display: none;
+    display: none !important;
 }
 
 .title{
@@ -296,41 +296,52 @@ ul{
 
 /* |-------------| Modal |-------------| */
 
-.modal-wrap{
-    position: absolute;
+.modal-wrap {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background-color: #292937a8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.modal{
-    width: 80vw;
-    height: 50dvh;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.modal {
+    width: 90%;
+    max-width: 420px;
+    height: auto;
     background-color: var(--color-bright);
     font-family: var(--font-family-body);
+    padding: 30px 25px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
 }
 
-.close-modal{
-    margin: 10px;
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 18px;
 }
 
-.modal-form label:not(:first-child){
-    margin-top: 10px;
+.modal-form label {
+    margin-bottom: -30px;
+    font-weight: 500;
 }
 
 .modal-form input{
     margin-top: 20px;
 }
 
-.modal-form{
-    height: calc(100% - 50px);
+.modal-form {
+    display: flex;
     flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
 }
   
 .modal-form input[type="submit"]{
@@ -341,16 +352,33 @@ ul{
     width: 100px;
 }
 
-.modal-form input:not([type="submit"]){
-    height: 30px;
+.modal-form input:not([type="submit"]) {
+    height: 40px;
+    width: 100%;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .close-modal{
     cursor: pointer;
 }
 
-.incorrect-form{
-    color: rgb(173, 12, 12);
+.incorrect-form {
+    color: var(--color-summary-text);
+    font-size: 13px;
+    margin-top: -15px;
+    margin-bottom: 5px;
+}
+
+
+.modal-form .btn {
+    margin: 0 auto;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 /* |-------------| Media Query |-------------| */

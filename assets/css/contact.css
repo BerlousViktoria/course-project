@@ -116,6 +116,10 @@
     color: black;
 }
 
+.social-links svg{
+    color: var(--color-dark);
+}
+
 .contact-form {
     width: 100%;
     display: flex;

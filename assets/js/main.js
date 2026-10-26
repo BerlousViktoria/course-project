@@ -14,15 +14,15 @@ if (iconBlock && mainMenu) {
   });
 }
 
-const loginBtn = document.getElementById("loginBtn");
+const loginBtn = document.querySelectorAll(".loginBtn");
 const closeModal = document.getElementById("closeModal");
 const modal = document.getElementById("modal");
 
-if (loginBtn && modal) {
-  loginBtn.addEventListener("click", () => {
+loginBtn.forEach(btn => {
+  btn.addEventListener("click", () => {
     modal.classList.remove("d-none");
   });
-}
+});
 
 if (closeModal && modal) {
   closeModal.addEventListener("click", () => {

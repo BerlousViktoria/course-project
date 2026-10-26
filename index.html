@@ -54,7 +54,7 @@
                         Створюємо індивідуальні інтер'єри,
                         де кожна деталь підкреслює Ваш характер і дарує затишок.
                     </p>
-                    <button id="loginBtn" class="btn item-center">
+                    <button class="btn item-center loginBtn">
                         <span>Дізнатися Більше</span>                        
                         <svg width="18" height="16"><use href="assets/images/icons/sprite.svg#btn-icon"></use></svg>
                     </button>
@@ -106,7 +106,7 @@
                         <p>Телефонуйте у будь-який час</p>
                     </div>                                       
                 </div>    
-                <button id="loginBtn" class="btn item-center fade">
+                <button class="btn item-center fade loginBtn">
                     <span>Дізантися більше</span>                        
                     <svg width="18" height="16"><use href="assets/images/icons/sprite.svg#btn-icon"></use></svg>
                 </button>                             
@@ -382,11 +382,11 @@
                 
             <form action="#" class="modal-form d-flex item-center" id="modal-form" novalidate>
                 <label for="username">Ім'я користувача:</label>
-                <input type="text" id="username" minlength="5" maxlength="45">
+                <input type="text" id="username" minlength="5" maxlength="45" required>
                 <p class="incorrect-form d-none" id="incorrectUsername">*ім'я користувача повинне містити від 5 до 45 символів.</p>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email">   
+                <input type="email" id="email" required>   
                 <p class="incorrect-form d-none" id="incorrectEmail">*переконайтеся, що формат коректний.</p>            
 
                 <label for="password">Пароль:</label>
