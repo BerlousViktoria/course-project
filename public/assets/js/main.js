@@ -18,11 +18,13 @@ const loginBtn = document.querySelectorAll(".loginBtn");
 const closeModal = document.getElementById("closeModal");
 const modal = document.getElementById("modal");
 
-loginBtn.forEach(btn => {
-  btn.addEventListener("click", () => {
-    modal.classList.remove("d-none");
+if (modal && loginBtn.length > 0) {
+  loginBtn.forEach(btn => {
+    btn.addEventListener("click", () => {
+      modal.classList.remove("d-none");
+    });
   });
-});
+}
 
 if (closeModal && modal) {
   closeModal.addEventListener("click", () => {
@@ -40,52 +42,20 @@ if (modal) {
 
 const animatedItems = document.querySelectorAll(".fade");
 
-const scrollObserver = new IntersectionObserver(
-  (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("appear");
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.15 },
-);
+if (animatedItems.length > 0) {
+  const scrollObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("appear");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
 
-animatedItems.forEach((item) => {
-  scrollObserver.observe(item);
-});
-
-
-// modal check
-
-const form = document.getElementById("modal-form");
-const username = document.getElementById("username");
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-
-const incorrectUsername = document.getElementById("incorrectUsername");
-const incorrectEmail = document.getElementById("incorrectEmail");
-const incorrectPassword = document.getElementById("incorrectPassword");
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  if (!username.checkValidity()) {
-    incorrectUsername.classList.remove("d-none");
-  } else {
-    incorrectUsername.classList.add("d-none");
-  }
-
-  if (!email.checkValidity()) {
-    incorrectEmail.classList.remove("d-none");
-  } else {
-    incorrectEmail.classList.add("d-none");
-  }
-
-  const specialCharRegex = /[-=\/?]/;
-  if (!specialCharRegex.test(password.value)) {
-    incorrectPassword.classList.remove("d-none");
-  } else {
-    incorrectPassword.classList.add("d-none");
-  }
-});
+  animatedItems.forEach((item) => {
+    scrollObserver.observe(item);
+  });
+}

@@ -1,10 +1,11 @@
 let projectsData = [];
+let filteredProjects = [];
 let currentFilter = "all";
 let currentSearch = "";
 let currentSort = "default";
 let currentPage = 1;
 const itemsPerPage = 4;
- 
+
 const container = document.getElementById("projectsContainer");
 const noResults = document.getElementById("noResults");
 const categoryFilters = document.getElementById("categoryFilters");
@@ -12,22 +13,22 @@ const searchInput = document.getElementById("searchInput");
 const sortSelect = document.getElementById("sortSelect");
 const paginationBtns = document.querySelectorAll(".navigation-item[data-page]");
 const nextBtn = document.getElementById("nextBtn");
- 
-// | -- фільтрація, сортування, пошук -- | 
+
+// | -- фільтрація, сортування, пошук -- |
 
 function filterByCategory(list, category) {
   if (category === "all") return list;
   return list.filter(project => project.category === category);
 }
- 
+
 function searchByTitle(list, text) {
   const query = text.toLowerCase().trim();
   return list.filter(project => project.title.toLowerCase().includes(query));
 }
- 
+
 function sortProjects(list, sortType) {
   const sortedList = list.slice();
- 
+
   if (sortType === "title-asc") {
     sortedList.sort((a, b) => a.title.localeCompare(b.title, "uk"));
   } else if (sortType === "title-desc") {
@@ -41,9 +42,9 @@ function sortProjects(list, sortType) {
   }
   return sortedList;
 }
- 
+
 // | --- функції відображення проєктів --- |
- 
+
 function createCard(project) {
   return `
     <article class="project-item" data-id="${project.id}">
@@ -61,25 +62,25 @@ function createCard(project) {
     </article>
   `;
 }
- 
+
 function showProjects(list) {
   if (!container) return;
- 
+
   if (list.length === 0) {
     container.innerHTML = "";
     if (noResults) noResults.classList.remove("d-none");
     return;
   }
- 
+
   if (noResults) noResults.classList.add("d-none");
- 
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedList = list.slice(startIndex, endIndex);
- 
+
   let leftColumn = "";
   let rightColumn = "";
- 
+
   for (let i = 0; i < paginatedList.length; i++) {
     const card = createCard(paginatedList[i]);
     if (i % 2 === 0) {
@@ -88,15 +89,15 @@ function showProjects(list) {
       rightColumn += card;
     }
   }
- 
+
   let html = `<div class="projects-column d-flex">${leftColumn}</div>`;
   if (rightColumn !== "") {
     html += `<div class="projects-column d-flex">${rightColumn}</div>`;
   }
- 
+
   container.innerHTML = html;
 }
- 
+
 function updateActivePagination() {
   paginationBtns.forEach(btn => {
     btn.classList.remove("active");
@@ -105,38 +106,37 @@ function updateActivePagination() {
     }
   });
 }
- 
+
 // | --- головна функція --- |
 
 function updatePage() {
   let result = projectsData;
- 
+
   result = filterByCategory(result, currentFilter);
   result = searchByTitle(result, currentSearch);
   result = sortProjects(result, currentSort);
- 
-  showProjects(result);
+
+  filteredProjects = result;
+  showProjects(filteredProjects);
   updateActivePagination();
 }
- 
-// | --- асинхронне завантаження --- | 
+
+// | --- асинхронне завантаження з бекенду --- |
 
 async function loadProjectsData() {
   if (!container) return;
- 
+
   container.innerHTML = `<p class="loading-message" style="text-align: center; width: 100%;">Завантаження проєктів...</p>`;
- 
+
   try {
     const response = await fetch('/api/projects');
- 
+
     if (!response.ok) {
       throw new Error(`Помилка мережі: ${response.status}`);
     }
- 
+
     projectsData = await response.json();
- 
     updatePage();
- 
   } catch (error) {
     console.error("Не вдалося завантажити дані:", error);
     container.innerHTML = `
@@ -146,23 +146,23 @@ async function loadProjectsData() {
     `;
   }
 }
- 
- 
+
 // | --- слухачі подій --- |
+
 if (categoryFilters) {
   const filterButtons = categoryFilters.querySelectorAll(".filter-item");
   filterButtons.forEach(button => {
     button.addEventListener("click", () => {
       filterButtons.forEach(b => b.classList.remove("active"));
       button.classList.add("active");
- 
+
       currentFilter = button.dataset.category;
       currentPage = 1;
       updatePage();
     });
   });
 }
- 
+
 if (searchInput) {
   searchInput.addEventListener("input", () => {
     currentSearch = searchInput.value;
@@ -177,7 +177,7 @@ if (sortSelect) {
     updatePage();
   });
 }
- 
+
 if (paginationBtns.length > 0) {
   paginationBtns.forEach(btn => {
     btn.addEventListener("click", (e) => {
@@ -188,11 +188,11 @@ if (paginationBtns.length > 0) {
     });
   });
 }
- 
+
 if (nextBtn) {
   nextBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    const totalPages = Math.ceil(projectsData.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
     if (currentPage < totalPages) {
       currentPage++;
       updatePage();
@@ -202,5 +202,5 @@ if (nextBtn) {
 }
 
 // --- запуск ---
- 
+
 loadProjectsData();
