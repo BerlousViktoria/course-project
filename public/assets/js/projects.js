@@ -127,7 +127,7 @@ async function loadProjectsData() {
   container.innerHTML = `<p class="loading-message" style="text-align: center; width: 100%;">Завантаження проєктів...</p>`;
  
   try {
-    const response = await fetch('assets/data/projects.json');
+    const response = await fetch('/api/projects');
  
     if (!response.ok) {
       throw new Error(`Помилка мережі: ${response.status}`);

@@ -1,7 +1,4 @@
-
-
 // ---- page BLOG ----
-// 
 
 const blogGrid = document.getElementById('blogGrid');
 const paginationBtn = document.querySelectorAll('.navigation-item[data-page]');
@@ -9,7 +6,6 @@ const nextBtn = document.getElementById('nextBtn');
 const itemPerPage = 6;
 
 let currentPage = 1;
-const totalPages = 3;
 
 const blogPosts = [
     { title: "Сучасні рішення для проєктування та ремонту затишної кухні", category: "Дизайн кухні", date: "26 грудня, 2022", image: "assets/images/news-photo-1.png", link: "#" },
@@ -18,7 +14,7 @@ const blogPosts = [
     { title: "Як ергономічно спланувати кухонну зону та підібрати освітлення", category: "Дизайн кухні", date: "26 грудня, 2022", image: "assets/images/news-photo-4.png", link: "#" },
     { title: "Поєднання текстилю та пастельних відтінків для максимального затишку", category: "Житловий простір", date: "22 грудня, 2022", image: "assets/images/news-photo-5.png", link: "#" },
     { title: "Стильні тенденції вибору натуральних матеріалів для вашого дому", category: "Дизайн інтер'єру", date: "25 грудня, 2022", image: "assets/images/news-photo-6.png", link: "#" },
-    
+
     { title: "Мінімалізм у спальні: правила організації простору", category: "Спальня", date: "15 грудня, 2022", image: "assets/images/news-photo-1.png", link: "#" },
     { title: "Сучасне освітлення: як правильно зонувати світлом", category: "Дизайн інтер'єру", date: "10 грудня, 2022", image: "assets/images/news-photo-2.png", link: "#" },
     { title: "Екологічні матеріали в сучасному інтер'єрі", category: "Житловий простір", date: "05 грудня, 2022", image: "assets/images/news-photo-3.png", link: "#" },
@@ -29,6 +25,8 @@ const blogPosts = [
     { title: "Секрети затишного освітлення для вечірнього відпочинку", category: "Спальня", date: "15 листопада, 2022", image: "assets/images/news-photo-1.png", link: "#" },
     { title: "Як правильно обрати килим для вітальні", category: "Житловий простір", date: "10 листопада, 2022", image: "assets/images/news-photo-2.png", link: "#" },
 ];
+
+const totalPages = Math.ceil(blogPosts.length / itemPerPage);
 
 function renderBlog(pageNumber) {
     if (!blogGrid) return;
