@@ -4,6 +4,10 @@ const path = require('path');
 require('dotenv').config();
 
 const pool = require('./server/config/db');
+const authRoutes = require('./server/routes/authRoutes');
+const contactRoutes = require('./server/routes/contactRoutes');
+const postsRoutes = require('./server/routes/postsRoutes');
+const projectsRoutes = require('./server/routes/projectsRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,7 +24,12 @@ app.get('/api/health', async (req, res) => {
         console.error('Помилка підключення до БД: ', err);
         res.status(500).json({ status : 'error', message : err.message});
     }
-})
+});
+
+app.use('/api/auth', authRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/api/post', postsRoutes);
+app.use('/api/projects', projectsRoutes);
 
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
