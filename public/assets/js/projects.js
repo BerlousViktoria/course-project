@@ -11,14 +11,13 @@ const noResults = document.getElementById("noResults");
 const categoryFilters = document.getElementById("categoryFilters");
 const searchInput = document.getElementById("searchInput");
 const sortSelect = document.getElementById("sortSelect");
-const paginationBtns = document.querySelectorAll(".navigation-item[data-page]");
-const nextBtn = document.getElementById("nextBtn");
+const paginationNav = document.querySelector(".navigation");
 
 // | -- фільтрація, сортування, пошук -- |
 
 function filterByCategory(list, category) {
   if (category === "all") return list;
-  return list.filter(project => project.category === category);
+  return list.filter(project => project.category_slug === category);
 }
 
 function searchByTitle(list, text) {
@@ -34,25 +33,49 @@ function sortProjects(list, sortType) {
   } else if (sortType === "title-desc") {
     sortedList.sort((a, b) => b.title.localeCompare(a.title, "uk"));
   } else if (sortType === "date-desc") {
-    sortedList.sort((a, b) => new Date(b.date) - new Date(a.date));
+    sortedList.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   } else if (sortType === "date-asc") {
-    sortedList.sort((a, b) => new Date(a.date) - new Date(b.date));
+    sortedList.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
   } else {
-    sortedList.sort((a, b) => a.id - b.id);
+    sortedList.sort((a, b) => Number(a.id) - Number(b.id));
   }
   return sortedList;
 }
 
-// | --- функції відображення проєктів --- |
+// | --- рендер категорій, карток та пагінації --- |
+
+function renderCategoryButtons(categories) {
+  if (!categoryFilters) return;
+
+  let buttonsHtml = `<button type="button" class="filter-item active" data-category="all">Усі</button>`;
+  categories.forEach(cat => {
+    buttonsHtml += `<button type="button" class="filter-item" data-category="${cat.slug}">${cat.name}</button>`;
+  });
+
+  categoryFilters.innerHTML = buttonsHtml;
+
+  const filterButtons = categoryFilters.querySelectorAll(".filter-item");
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      filterButtons.forEach(b => b.classList.remove("active"));
+      button.classList.add("active");
+
+      currentFilter = button.dataset.category;
+      currentPage = 1;
+      updatePage();
+    });
+  });
+}
 
 function createCard(project) {
+  const subtitle = project.category_name || project.description || "";
   return `
     <article class="project-item" data-id="${project.id}">
-      <img src="${project.image}" alt="${project.title}">
+      <img src="${project.image_url}" alt="${project.title}">
       <div class="project-item-info">
         <div class="project-item-desc">
           <h3 class="title">${project.title}</h3>
-          <p class="subtitle">${project.subtitle}</p>
+          <p class="subtitle">${subtitle}</p>
         </div>
         <a href="#" class="icon-link project-link d-flex item-center"
            aria-label="Переглянути проєкт ${project.title}">
@@ -98,13 +121,52 @@ function showProjects(list) {
   container.innerHTML = html;
 }
 
-function updateActivePagination() {
-  paginationBtns.forEach(btn => {
-    btn.classList.remove("active");
-    if (parseInt(btn.getAttribute("data-page")) === currentPage) {
-      btn.classList.add("active");
-    }
+function renderPagination(totalItems) {
+  if (!paginationNav) return;
+
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  if (totalPages <= 1) {
+    paginationNav.innerHTML = "";
+    return;
+  }
+
+  let html = "";
+  for (let i = 1; i <= totalPages; i++) {
+    const label = String(i).padStart(2, "0");
+    const activeClass = i === currentPage ? "active" : "";
+    html += `<a href="#" class="navigation-item ${activeClass}" data-page="${i}">${label}</a>`;
+  }
+
+  if (currentPage < totalPages) {
+    html += `
+      <a href="#" class="navigation-item icon-link" id="nextBtn" aria-label="Наступна сторінка">
+        <svg width="10" height="18"><use href="assets/images/icons/sprite.svg#arrow-right-icon"></use></svg>
+      </a>
+    `;
+  }
+
+  paginationNav.innerHTML = html;
+
+  paginationNav.querySelectorAll(".navigation-item[data-page]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      currentPage = parseInt(btn.getAttribute("data-page"));
+      updatePage();
+      window.scrollTo({ top: 300, behavior: "smooth" });
+    });
   });
+
+  const nextBtn = document.getElementById("nextBtn");
+  if (nextBtn) {
+    nextBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (currentPage < totalPages) {
+        currentPage++;
+        updatePage();
+        window.scrollTo({ top: 300, behavior: "smooth" });
+      }
+    });
+  }
 }
 
 // | --- головна функція --- |
@@ -118,7 +180,7 @@ function updatePage() {
 
   filteredProjects = result;
   showProjects(filteredProjects);
-  updateActivePagination();
+  renderPagination(filteredProjects.length);
 }
 
 // | --- асинхронне завантаження з бекенду --- |
@@ -129,13 +191,19 @@ async function loadProjectsData() {
   container.innerHTML = `<p class="loading-message" style="text-align: center; width: 100%;">Завантаження проєктів...</p>`;
 
   try {
-    const response = await fetch('/api/projects');
+    const [projectsRes, categoriesRes] = await Promise.all([
+      fetch("/api/projects"),
+      fetch("/api/projects/categories")
+    ]);
 
-    if (!response.ok) {
-      throw new Error(`Помилка мережі: ${response.status}`);
+    if (!projectsRes.ok || !categoriesRes.ok) {
+      throw new Error(`Помилка мережі: ${projectsRes.status}`);
     }
 
-    projectsData = await response.json();
+    projectsData = await projectsRes.json();
+    const categories = await categoriesRes.json();
+
+    renderCategoryButtons(categories);
     updatePage();
   } catch (error) {
     console.error("Не вдалося завантажити дані:", error);
@@ -149,20 +217,6 @@ async function loadProjectsData() {
 
 // | --- слухачі подій --- |
 
-if (categoryFilters) {
-  const filterButtons = categoryFilters.querySelectorAll(".filter-item");
-  filterButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      filterButtons.forEach(b => b.classList.remove("active"));
-      button.classList.add("active");
-
-      currentFilter = button.dataset.category;
-      currentPage = 1;
-      updatePage();
-    });
-  });
-}
-
 if (searchInput) {
   searchInput.addEventListener("input", () => {
     currentSearch = searchInput.value;
@@ -175,29 +229,6 @@ if (sortSelect) {
   sortSelect.addEventListener("change", () => {
     currentSort = sortSelect.value;
     updatePage();
-  });
-}
-
-if (paginationBtns.length > 0) {
-  paginationBtns.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      currentPage = parseInt(btn.getAttribute("data-page"));
-      updatePage();
-      window.scrollTo({ top: 300, behavior: 'smooth' });
-    });
-  });
-}
-
-if (nextBtn) {
-  nextBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
-    if (currentPage < totalPages) {
-      currentPage++;
-      updatePage();
-      window.scrollTo({ top: 300, behavior: 'smooth' });
-    }
   });
 }
 
