@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адмін-панель — Interno</title>
+    <link rel="stylesheet" href="assets/css/_variables.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+    <header class="admin-header">
+        <div class="admin-container admin-header__inner">
+            <a href="index.html" class="admin-logo">
+                <svg width="32" height="32" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 34.0003H13.4588V24.499C13.4588 22.4853 15.0898 20.8543 17.1035 20.8543C19.1172 20.8543 20.7482 22.4853 20.7482 24.499V34.0003H33.9975V0C15.2211 0 0 15.2211 0 34.0003Z" fill="#CDA274"/>
+                </svg>
+                <span>Interno <small>Admin</small></span>
+            </a>
+
+            <div class="admin-header__actions">
+                <a href="index.html" class="btn-outline">На сайт</a>
+                <button type="button" class="btn-dark" onclick="logout()">Вийти</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-container admin-main">
+        <nav class="admin-tabs">
+            <button type="button" class="tab-btn active" data-tab="projects">Проєкти</button>
+            <button type="button" class="tab-btn" data-tab="posts">Блог</button>
+            <button type="button" class="tab-btn" data-tab="contacts">Заявки</button>
+        </nav>
+
+        <section id="tab-projects" class="tab-panel active">
+            <div class="admin-card">
+                <h2 id="project-form-title">Додати новий проєкт</h2>
+                <form id="project-form" class="admin-form">
+                    <input type="hidden" id="project-id">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="project-title">Назва проєкту *</label>
+                            <input type="text" id="project-title" required placeholder="Minimal Bedroom">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="project-category">Категорія</label>
+                            <select id="project-category">
+                                <option value="">Без категорії</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-image">Шлях або URL зображення *</label>
+                        <input type="text" id="project-image" required placeholder="assets/images/project-1.jpg">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-description">Опис</label>
+                        <textarea id="project-description" rows="3" placeholder="Короткий опис інтер'єру..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-dark" id="project-submit-btn">Зберегти проєкт</button>
+                        <button type="button" class="btn-outline hidden" id="project-cancel-btn">Скасувати редагування</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="admin-card">
+                <h2>Список проєктів</h2>
+                <div class="table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Фото</th>
+                                <th>Назва</th>
+                                <th>Категорія</th>
+                                <th>Дії</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projects-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-posts" class="tab-panel">
+            <div class="admin-card">
+                <h2 id="post-form-title">Додати статтю</h2>
+                <form id="post-form" class="admin-form">
+                    <input type="hidden" id="post-id">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="post-title">Заголовок статті *</label>
+                            <input type="text" id="post-title" required placeholder="Let's Get Solution For Building Construction Work">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="post-tag">Тег (категорія статті)</label>
+                            <input type="text" id="post-tag" placeholder="Kitchen Design">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="post-image">Шлях або URL зображення</label>
+                        <input type="text" id="post-image" placeholder="assets/images/blog-1.jpg">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="post-content">Текст статті *</label>
+                        <textarea id="post-content" rows="4" required placeholder="Повний текст публікації..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-dark" id="post-submit-btn">Опублікувати</button>
+                        <button type="button" class="btn-outline hidden" id="post-cancel-btn">Скасувати редагування</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="admin-card">
+                <h2>Усі публікації</h2>
+                <div class="table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Заголовок</th>
+                                <th>Тег</th>
+                                <th>Дата</th>
+                                <th>Дії</th>
+                            </tr>
+                        </thead>
+                        <tbody id="posts-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-contacts" class="tab-panel">
+            <div class="admin-card">
+                <h2>Звернення клієнтів</h2>
+                <div class="table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Ім'я</th>
+                                <th>Контакти</th>
+                                <th>Тема</th>
+                                <th>Повідомлення</th>
+                                <th>Дії</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contacts-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>
