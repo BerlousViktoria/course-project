@@ -374,26 +374,34 @@
 
     </main>
 
-    <div id="modal" class="modal-wrap d-none">   
+<div id="modal" class="modal-wrap d-none">   
         <div class="modal">
-            <div id="closeModal" class="close-modal">
+            <button type="button" id="closeModal" class="close-modal" aria-label="Закрити вікно">
                 <i class="fa-solid fa-xmark"></i>
-            </div>                           
-                
-            <form action="#" class="modal-form d-flex item-center" id="modal-form" novalidate>
-                <label for="username">Ім'я користувача:</label>
-                <input type="text" id="username" minlength="5" maxlength="45" required>
-                <p class="incorrect-form d-none" id="incorrectUsername">*ім'я користувача повинне містити від 5 до 45 символів.</p>
+            </button>                           
+            
+            <h3 class="modal-title">Залишити заявку</h3>
+            <p class="modal-subtitle">Заповніть форму, і наш дизайнер зв'яжеться з вами</p>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" required>   
-                <p class="incorrect-form d-none" id="incorrectEmail">*переконайтеся, що формат коректний.</p>            
+            <form class="modal-form d-flex" id="modal-form" novalidate>
+                <label for="modal-name">Ваше ім'я *</label>
+                <input type="text" id="modal-name" required placeholder="Олена Коваленко">
+                <p class="incorrect-form d-none" id="incorrectName">*введіть ваше ім'я (мінімум 2 символи).</p>
 
-                <label for="password">Пароль:</label>
-                <input type="password" id="password">   
-                <p class="incorrect-form d-none" id="incorrectPassword">*пароль повинен містити хоча б один символ (?-=/).</p>
+                <label for="modal-email">Email *</label>
+                <input type="email" id="modal-email" required placeholder="olena@example.com">   
+                <p class="incorrect-form d-none" id="incorrectEmail">*переконайтеся, що формат email коректний.</p>            
+
+                <label for="modal-phone">Телефон</label>
+                <input type="tel" id="modal-phone" placeholder="+380 (50) 123-45-67">
+
+                <label for="modal-message">Повідомлення *</label>
+                <textarea id="modal-message" rows="3" required placeholder="Розкажіть коротко про ваш проєкт..."></textarea>
+                <p class="incorrect-form d-none" id="incorrectMessage">*напишіть коротке повідомлення.</p>
                 
-                <input type="submit" class="btn">       
+                <div id="modal-status" class="modal-status d-none"></div>
+
+                <button type="submit" class="btn" id="modal-submit-btn">Надіслати запит</button>       
             </form>
         </div>
     </div>
