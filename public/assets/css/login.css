@@ -1,0 +1,135 @@
+.login-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    font-family: var(--font-family-body);
+    color: var(--color-content);
+    box-sizing: border-box;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 48px 40px;
+    border: 1px solid #e7e7e7;
+    border-radius: 30px;
+    background-color: var(--color-bright);
+    box-sizing: border-box;
+}
+
+.login-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    text-decoration: none;
+    font-family: var(--font-family-heading);
+    font-size: 2rem;
+    color: var(--color-dark);
+}
+
+.login-card h1 {
+    margin: 0 0 8px;
+    font-family: var(--font-family-heading);
+    color: var(--color-dark);
+    font-size: 3.125rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.login-subtitle {
+    margin: 0 0 30px;
+    color: var(--color-content);
+    font-size: 16px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-dark);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid var(--color-summary-text);
+    border-radius: 14px;
+    background-color: #ffffff;
+    color: var(--color-dark);
+    font-family: var(--font-family-body);
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--color-dark);
+}
+
+.error-message {
+    display: none;
+    margin-bottom: 16px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background-color: #fdecea;
+    color: #c0392b;
+    font-size: 14px;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 18px;
+    background-color: var(--color-dark);
+    color: #ffffff;
+    font-family: var(--font-family-body);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.login-btn:hover {
+    background-color: var(--color-summary-text);
+}
+
+.login-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 24px;
+    color: var(--color-content);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--color-summary-text);
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 36px 24px;
+        border-radius: 24px;
+    }
+
+    .login-card h1 {
+        font-size: 1.875rem;
+    }
+}
