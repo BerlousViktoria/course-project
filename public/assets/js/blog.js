@@ -48,7 +48,7 @@ function renderBlog(pageNumber) {
         </h3>
         <div class="blog-card-footer d-flex item-center">
           <time datetime="${post.date}" class="subtitle">${post.date}</time>
-          <a href="${post.link}" class="icon-link d-flex item-center" aria-label="Читати детальніше">
+          <a href="404.html" class="icon-link d-flex item-center" aria-label="Читати детальніше">
             <svg width="10" height="18"><use href="assets/images/icons/sprite.svg#arrow-right-icon"></use></svg>
           </a>
         </div>
