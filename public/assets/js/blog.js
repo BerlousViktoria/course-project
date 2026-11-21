@@ -19,7 +19,8 @@ function renderBlog(page) {
   const pagePosts = blogPosts.slice(start, start + itemsPerPage);
 
   blogGrid.innerHTML = pagePosts.map(post => {
-    const date = new Date(post.created_at).toLocaleDateString('uk-UA');
+    const d = new Date(post.created_at);
+    const date = `${d.toLocaleString('uk-UA', { month: 'long' })} ${d.getDate()}, ${d.getFullYear()}`;
     return `
       <article class="blog-card" data-id="${post.id}">
         <div class="blog-card-image-wrap">

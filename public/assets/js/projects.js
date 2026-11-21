@@ -68,7 +68,7 @@ function renderCategoryButtons(categories) {
 }
 
 function createCard(project) {
-  const subtitle = project.category_name || project.description || "";
+  const subtitle = project.category_name || "";
   return `
     <article class="project-item" data-id="${project.id}">
       <img src="${project.image_url}" alt="${project.title}">
