@@ -15,7 +15,7 @@ router.get('/categories', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const result = await pool.query(
-            `SELECT p.id, p.title, p.description, p.image_url, p.category_id, p.created_at,
+            `SELECT p.id, p.title, p.image_url, p.category_id, p.created_at,
                     c.name AS category_name, c.slug AS category_slug
              FROM public.projects p
              LEFT JOIN public.categories c ON p.category_id = c.id
@@ -30,13 +30,17 @@ router.get('/', async (req, res) => {
 
 router.post('/', requireAuth, async (req, res) => {
     try {
-        const { title, description, image_url, category_id } = req.body;
+        const { title, image_url, category_id } = req.body;
+
+        if (!title || !image_url) {
+            return res.status(400).json({ error: 'Назва та зображення обовʼязкові' });
+        }
 
         const result = await pool.query(
-            `INSERT INTO public.projects (title, description, image_url, category_id)
-             VALUES ($1, $2, $3, $4)
+            `INSERT INTO public.projects (title, image_url, category_id)
+             VALUES ($1, $2, $3)
              RETURNING *`,
-            [title, description, image_url, category_id || null]
+            [title, image_url, category_id || null]
         );
 
         res.status(201).json(result.rows[0]);
@@ -48,17 +52,20 @@ router.post('/', requireAuth, async (req, res) => {
 router.put('/:id', requireAuth, async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description, image_url, category_id } = req.body;
+        const { title, image_url, category_id } = req.body;
+
+        if (!title || !image_url) {
+            return res.status(400).json({ error: 'Назва та зображення обовʼязкові' });
+        }
 
         const result = await pool.query(
             `UPDATE public.projects
              SET title = $1,
-                 description = $2,
-                 image_url = $3,
-                 category_id = $4
-             WHERE id = $5
+                 image_url = $2,
+                 category_id = $3
+             WHERE id = $4
              RETURNING *`,
-            [title, description, image_url, category_id || null, id]
+            [title, image_url, category_id || null, id]
         );
 
         if (result.rows.length === 0) {
