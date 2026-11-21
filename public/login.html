@@ -18,7 +18,7 @@
                 <span>Interno</span>
             </a>
 
-            <h1>Вхід в систему</h1>
+            <h1 id="auth-title">Вхід в систему</h1>
             <p class="login-subtitle">Панель керування студією інтер'єру</p>
 
             <form id="login-form">
@@ -34,9 +34,10 @@
 
                 <div id="login-error" class="error-message"></div>
 
-                <button type="submit" class="login-btn">Увійти</button>
+                <button type="submit" id="auth-submit-btn" class="login-btn">Увійти</button>
             </form>
 
+            <a href="#" id="toggle-auth-mode" class="back-link">Створити адміністратора</a>
             <a href="index.html" class="back-link">← Повернутися на головну</a>
         </div>
     </main>
