@@ -39,7 +39,9 @@ async function loadAll() {
     ]);
 
     if (categories && $('project-category')) {
-        $('project-category').innerHTML = categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+        $('project-category').innerHTML =
+            '<option value="">Без категорії</option>' +
+            categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
     }
 
     if (projects && $('projects-table-body')) {
@@ -49,9 +51,9 @@ async function loadAll() {
                 <td>${p.id}</td>
                 <td><img src="${p.image_url}" class="table-thumb"></td>
                 <td>${p.title}</td>
-                <td>${p.category_name || p.category_id}</td>
+                <td>${p.category_name || 'Без категорії'}</td>
                 <td class="actions-cell">
-                    <button type="button" class="btn-edit" onclick="fillForm('project', ${p.id})">Редагувати</button>
+                    <button type="button" class="btn-edit" onclick="fillForm('project', '${p.id}')">Редагувати</button>
                     <button type="button" class="btn-delete" onclick="removeItem('/api/projects/${p.id}')">Видалити</button>
                 </td>
             </tr>`).join('');
@@ -63,10 +65,10 @@ async function loadAll() {
             <tr>
                 <td>${p.id}</td>
                 <td>${p.title}</td>
-                <td>${p.tag}</td>
+                <td>${p.tag || '—'}</td>
                 <td>${new Date(p.created_at).toLocaleDateString('uk-UA')}</td>
                 <td class="actions-cell">
-                    <button type="button" class="btn-edit" onclick="fillForm('post', ${p.id})">Редагувати</button>
+                    <button type="button" class="btn-edit" onclick="fillForm('post', '${p.id}')">Редагувати</button>
                     <button type="button" class="btn-delete" onclick="removeItem('/api/posts/${p.id}')">Видалити</button>
                 </td>
             </tr>`).join('');
@@ -88,30 +90,30 @@ async function loadAll() {
 }
 
 function fillForm(type, id) {
-    const item = data[type + 's'].find(x => x.id === id);
+    const item = data[type + 's'].find(x => String(x.id) === String(id));
     if (!item) return;
 
     $(`${type}-id`).value = item.id;
     $(`${type}-title`).value = item.title;
-    $(`${type}-image`).value = item.image_url;
+    $(`${type}-image`).value = item.image_url || '';
 
     if (type === 'project') {
-        $('project-category').value = item.category_id;
-        $('project-description').value = item.description || '';
+        $('project-category').value = item.category_id || '';
     } else {
-        $('post-tag').value = item.tag;
+        $('post-tag').value = item.tag || '';
         $('post-content').value = item.content || '';
     }
 
     $(`${type}-form-title`).textContent = `Редагувати #${id}`;
-    $(`${type}-cancel-btn`).style.display = 'inline-block';
+    $(`${type}-cancel-btn`).classList.remove('hidden');
+    $(`${type}-form`).scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function resetForm(type) {
     $(`${type}-form`).reset();
     $(`${type}-id`).value = '';
-    $(`${type}-form-title`).textContent = type === 'project' ? 'Додати новий проєкт' : 'Додати нову статтю';
-    $(`${type}-cancel-btn`).style.display = 'none';
+    $(`${type}-form-title`).textContent = type === 'project' ? 'Додати новий проєкт' : 'Додати статтю';
+    $(`${type}-cancel-btn`).classList.add('hidden');
 }
 
 async function removeItem(url) {
@@ -121,11 +123,11 @@ async function removeItem(url) {
 $('project-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const id = $('project-id').value;
+    const categoryVal = $('project-category').value;
     const body = {
         title: $('project-title').value.trim(),
-        category_id: Number($('project-category').value),
-        image_url: $('project-image').value.trim(),
-        description: $('project-description').value.trim()
+        category_id: categoryVal ? Number(categoryVal) : null,
+        image_url: $('project-image').value.trim()
     };
     if (await api(id ? `/api/projects/${id}` : '/api/projects', id ? 'PUT' : 'POST', body)) {
         resetForm('project');

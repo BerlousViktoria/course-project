@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Зв'яжіться з нами</title>
+    <title>Зв'яжіться з нами — Interno</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="icon" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/style.css">   
@@ -15,7 +15,6 @@
         <div class="line-col"></div>
         <div class="line-col"></div>
     </div>
-
 
     <header class="main-header d-flex">
         <div class="navbar content-wrap d-flex">
@@ -98,15 +97,17 @@
                     </div>
                 </aside>
 
-                <form action="#" class="contact-form d-flex">
+                <form action="#" class="contact-form d-flex" novalidate>
                     <div class="contact-form-row d-flex">
                         <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Ваше ім'я" required>
+                            <input type="text" id="name" name="name" minlength="2" placeholder="Ваше ім'я *" required>
                             <label for="name" class="d-none">Ваше ім'я</label>
+                            <p class="incorrect-form d-none">*введіть ваше ім'я (мінімум 2 символи).</p>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Електронна пошта" required>
+                            <input type="email" id="email" name="email" placeholder="Електронна пошта *" required>
                             <label for="email" class="d-none">Електронна пошта</label>
+                            <p class="incorrect-form d-none">*переконайтеся, що формат email коректний.</p>
                         </div>
                     </div>
 
@@ -116,15 +117,19 @@
                             <label for="subject" class="d-none">Тема</label>
                         </div>
                         <div class="form-group">
-                            <input type="tel" id="phone" name="phone" placeholder="Номер телефону">
+                            <input type="tel" id="phone" name="phone" pattern="[\d\s()+-]{7,20}" placeholder="Номер телефону">
                             <label for="phone" class="d-none">Номер телефону</label>
+                            <p class="incorrect-form d-none">*введіть коректний номер телефону.</p>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <textarea id="message" name="message" rows="5" placeholder="Добрий день, мене цікавить..."></textarea>
+                        <textarea id="message" name="message" rows="5" minlength="5" placeholder="Добрий день, мене цікавить... *" required></textarea>
                         <label for="message" class="d-none">Повідомлення</label>
+                        <p class="incorrect-form d-none">*напишіть повідомлення (мінімум 5 символів).</p>
                     </div>
+
+                    <div class="form-status d-none"></div>
 
                     <button type="submit" class="btn contact-btn item-center">
                         <span>Надіслати</span>

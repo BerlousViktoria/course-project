@@ -171,6 +171,30 @@
     color: var(--color-summary-text);
 }
 
+.contact-form .incorrect-form {
+    margin-top: 6px;
+    margin-bottom: 0;
+    font-size: 13px;
+    color: #c0392b;
+}
+
+.contact-form .form-status {
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-family: var(--font-family-body);
+    font-size: 15px;
+    text-align: center;
+}
+
+.contact-form .form-status.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.contact-form .form-status.error {
+    background-color: #fdecea;
+    color: #c0392b;
+}
 
 /* |-------------| Media Query |-------------| */
 
@@ -199,10 +223,12 @@
 
     .contact-form {
         max-width: 730px;
+        padding: 0 20px;
+        box-sizing: border-box;
     }
 
     .contact-form-row {
-        margin: 20px;
+        margin: 20px 0;
         flex-direction: row;
         gap: 40px;
     }

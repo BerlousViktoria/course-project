@@ -1,42 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const contactForms = document.querySelectorAll('.contact-form, #modal-form');
+    document.querySelectorAll('.contact-form, #modal-form').forEach(form => {
+        const isModal = form.id === 'modal-form';
+        const status = form.querySelector(isModal ? '#modal-status' : '.form-status');
+        const inputs = [...form.querySelectorAll('input[name], textarea[name]')];
 
-    contactForms.forEach(form => {
+        const getError = el => el.parentElement.querySelector('.incorrect-form') || el.nextElementSibling;
+
+        inputs.forEach(el => {
+            el.addEventListener('input', () => {
+                getError(el)?.classList.add('d-none');
+                status?.classList.add('d-none');
+            });
+        });
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const payload = {
-                name: (form.querySelector('[name="name"], #modal-name')?.value || '').trim(),
-                email: (form.querySelector('[name="email"], #modal-email')?.value || '').trim(),
-                subject: (form.querySelector('[name="subject"]')?.value || '').trim() || null,
-                phone: (form.querySelector('[name="phone"], #modal-phone')?.value || '').trim() || null,
-                message: (form.querySelector('[name="message"], #modal-message')?.value || '').trim()
-            };
+            const valid = inputs.map(el => {
+                el.value = el.value.trim();
+                const ok = el.checkValidity();
+                getError(el)?.classList.toggle('d-none', ok);
+                return ok;
+            }).every(Boolean);
 
-            if (!payload.name || !payload.email || !payload.message) {
-                alert('Будь ласка, заповніть обов’язкові поля (Ім’я, Email, Повідомлення).');
-                return;
-            }
+            if (!valid) return;
+
+            const data = Object.fromEntries(new FormData(form));
 
             try {
-                const response = await fetch('/api/contact', {
+                const res = await fetch('/api/contact', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(data)
                 });
-
-                if (!response.ok) throw new Error('Помилка надсилання заявки');
+                if (!res.ok) throw new Error();
 
                 form.reset();
-                alert('Дякуємо! Вашу заявку успішно надіслано.');
-
-                const modalWrap = document.getElementById('modal');
-                if (form.id === 'modal-form' && modalWrap) {
-                    modalWrap.classList.add('d-none');
+                if (status) {
+                    status.textContent = 'Дякуємо! Вашу заявку успішно надіслано.';
+                    status.className = `${isModal ? 'modal-status' : 'form-status'} success`;
                 }
-            } catch (error) {
-                console.error(error);
-                alert('Не вдалося надіслати заявку. Спробуйте пізніше.');
+                if (isModal) {
+                    setTimeout(() => document.getElementById('modal')?.classList.add('d-none'), 1500);
+                }
+            } catch {
+                if (status) {
+                    status.textContent = 'Не вдалося надіслати заявку. Спробуйте пізніше.';
+                    status.className = `${isModal ? 'modal-status' : 'form-status'} error`;
+                }
             }
         });
     });
