@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = 'admin.html';
                 } else if (isRegisterMode) {
                     errorBox.style.color = '#2e7d32';
-                    errorBox.textContent = 'Адміністратора створено. Підтвердіть email або увійдіть.';
+                    errorBox.textContent = 'Адміністратора створено.';
                     toggleBtn.click();
                 }
             } catch (err) {

@@ -1,7 +1,6 @@
 const token = localStorage.getItem('token');
 if (!token) window.location.href = 'login.html';
 
-const $ = (id) => document.getElementById(id);
 let data = { projects: [], posts: [] };
 
 async function api(url, method = 'GET', body = null) {
@@ -26,7 +25,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.onclick = () => {
         document.querySelectorAll('.tab-btn, .tab-panel').forEach(el => el.classList.remove('active'));
         btn.classList.add('active');
-        $(`tab-${btn.dataset.tab}`)?.classList.add('active');
+        document.getElementById(`tab-${btn.dataset.tab}`)?.classList.add('active');
     };
 });
 
@@ -38,15 +37,17 @@ async function loadAll() {
         api('/api/contact')
     ]);
 
-    if (categories && $('project-category')) {
-        $('project-category').innerHTML =
+    const categorySelect = document.getElementById('project-category');
+    if (categories && categorySelect) {
+        categorySelect.innerHTML =
             '<option value="">Без категорії</option>' +
             categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
     }
 
-    if (projects && $('projects-table-body')) {
+    const projectsBody = document.getElementById('projects-table-body');
+    if (projects && projectsBody) {
         data.projects = projects;
-        $('projects-table-body').innerHTML = projects.map(p => `
+        projectsBody.innerHTML = projects.map(p => `
             <tr>
                 <td>${p.id}</td>
                 <td><img src="${p.image_url}" class="table-thumb"></td>
@@ -59,9 +60,10 @@ async function loadAll() {
             </tr>`).join('');
     }
 
-    if (posts && $('posts-table-body')) {
+    const postsBody = document.getElementById('posts-table-body');
+    if (posts && postsBody) {
         data.posts = posts;
-        $('posts-table-body').innerHTML = posts.map(p => `
+        postsBody.innerHTML = posts.map(p => `
             <tr>
                 <td>${p.id}</td>
                 <td>${p.title}</td>
@@ -74,8 +76,9 @@ async function loadAll() {
             </tr>`).join('');
     }
 
-    if (contacts && $('contacts-table-body')) {
-        $('contacts-table-body').innerHTML = contacts.map(c => `
+    const contactsBody = document.getElementById('contacts-table-body');
+    if (contacts && contactsBody) {
+        contactsBody.innerHTML = contacts.map(c => `
             <tr>
                 <td>${new Date(c.created_at).toLocaleDateString('uk-UA')}</td>
                 <td>${c.name}</td>
@@ -93,41 +96,41 @@ function fillForm(type, id) {
     const item = data[type + 's'].find(x => String(x.id) === String(id));
     if (!item) return;
 
-    $(`${type}-id`).value = item.id;
-    $(`${type}-title`).value = item.title;
-    $(`${type}-image`).value = item.image_url || '';
+    document.getElementById(`${type}-id`).value = item.id;
+    document.getElementById(`${type}-title`).value = item.title;
+    document.getElementById(`${type}-image`).value = item.image_url || '';
 
     if (type === 'project') {
-        $('project-category').value = item.category_id || '';
+        document.getElementById('project-category').value = item.category_id || '';
     } else {
-        $('post-tag').value = item.tag || '';
-        $('post-content').value = item.content || '';
+        document.getElementById('post-tag').value = item.tag || '';
+        document.getElementById('post-content').value = item.content || '';
     }
 
-    $(`${type}-form-title`).textContent = `Редагувати #${id}`;
-    $(`${type}-cancel-btn`).classList.remove('hidden');
-    $(`${type}-form`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById(`${type}-form-title`).textContent = `Редагувати #${id}`;
+    document.getElementById(`${type}-cancel-btn`).classList.remove('hidden');
+    document.getElementById(`${type}-form`).scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function resetForm(type) {
-    $(`${type}-form`).reset();
-    $(`${type}-id`).value = '';
-    $(`${type}-form-title`).textContent = type === 'project' ? 'Додати новий проєкт' : 'Додати статтю';
-    $(`${type}-cancel-btn`).classList.add('hidden');
+    document.getElementById(`${type}-form`).reset();
+    document.getElementById(`${type}-id`).value = '';
+    document.getElementById(`${type}-form-title`).textContent = type === 'project' ? 'Додати новий проєкт' : 'Додати статтю';
+    document.getElementById(`${type}-cancel-btn`).classList.add('hidden');
 }
 
 async function removeItem(url) {
     if (confirm('Видалити запис?') && await api(url, 'DELETE')) loadAll();
 }
 
-$('project-form')?.addEventListener('submit', async (e) => {
+document.getElementById('project-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const id = $('project-id').value;
-    const categoryVal = $('project-category').value;
+    const id = document.getElementById('project-id').value;
+    const categoryVal = document.getElementById('project-category').value;
     const body = {
-        title: $('project-title').value.trim(),
+        title: document.getElementById('project-title').value.trim(),
         category_id: categoryVal ? Number(categoryVal) : null,
-        image_url: $('project-image').value.trim()
+        image_url: document.getElementById('project-image').value.trim()
     };
     if (await api(id ? `/api/projects/${id}` : '/api/projects', id ? 'PUT' : 'POST', body)) {
         resetForm('project');
@@ -135,14 +138,14 @@ $('project-form')?.addEventListener('submit', async (e) => {
     }
 });
 
-$('post-form')?.addEventListener('submit', async (e) => {
+document.getElementById('post-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const id = $('post-id').value;
+    const id = document.getElementById('post-id').value;
     const body = {
-        title: $('post-title').value.trim(),
-        tag: $('post-tag').value.trim(),
-        image_url: $('post-image').value.trim(),
-        content: $('post-content').value.trim()
+        title: document.getElementById('post-title').value.trim(),
+        tag: document.getElementById('post-tag').value.trim(),
+        image_url: document.getElementById('post-image').value.trim(),
+        content: document.getElementById('post-content').value.trim()
     };
     if (await api(id ? `/api/posts/${id}` : '/api/posts', id ? 'PUT' : 'POST', body)) {
         resetForm('post');
@@ -150,7 +153,7 @@ $('post-form')?.addEventListener('submit', async (e) => {
     }
 });
 
-$('project-cancel-btn')?.addEventListener('click', () => resetForm('project'));
-$('post-cancel-btn')?.addEventListener('click', () => resetForm('post'));
+document.getElementById('project-cancel-btn')?.addEventListener('click', () => resetForm('project'));
+document.getElementById('post-cancel-btn')?.addEventListener('click', () => resetForm('post'));
 
 document.addEventListener('DOMContentLoaded', loadAll);
