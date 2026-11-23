@@ -52,9 +52,33 @@
                         </div>
                     </div>
 
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="project-client">Клієнт</label>
+                            <input type="text" id="project-client" placeholder="Олена Ковальчук">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="project-tags">Теги</label>
+                            <input type="text" id="project-tags" placeholder="Інтер'єр, Спальня, Мінімалізм">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="project-image">Шлях або URL зображення *</label>
+                            <input type="text" id="project-image" required placeholder="assets/images/project-1.jpg">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="project-link">Посилання</label>
+                            <input type="text" id="project-link" placeholder="interno-studio.ua/minimal-bedroom">
+                        </div>
+                    </div>
+
                     <div class="form-group">
-                        <label for="project-image">Шлях або URL зображення *</label>
-                        <input type="text" id="project-image" required placeholder="assets/images/project-1.jpg">
+                        <label for="project-description">Опис проєкту</label>
+                        <textarea id="project-description" rows="4" placeholder="Детальний опис концепції та реалізації проєкту..."></textarea>
                     </div>
 
                     <div class="form-actions">
@@ -74,6 +98,7 @@
                                 <th>Фото</th>
                                 <th>Назва</th>
                                 <th>Категорія</th>
+                                <th>Клієнт</th>
                                 <th>Дії</th>
                             </tr>
                         </thead>
@@ -97,7 +122,15 @@
 
                         <div class="form-group">
                             <label for="post-tag">Тег (категорія статті)</label>
-                            <input type="text" id="post-tag" placeholder="Kitchen Design">
+                            <input type="text" id="post-tag" list="blog-tags" placeholder="Оберіть або введіть тег">
+                            <datalist id="blog-tags">
+                                <option value="Дизайн кухні">
+                                <option value="Дизайн вітальні">
+                                <option value="Дизайн спальні">
+                                <option value="Дизайн ванної">
+                                <option value="Дизайн інтер'єру">
+                                <option value="Освітлення">
+                            </datalist>
                         </div>
                     </div>
 

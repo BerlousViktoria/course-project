@@ -53,6 +53,7 @@ async function loadAll() {
                 <td><img src="${p.image_url}" class="table-thumb"></td>
                 <td>${p.title}</td>
                 <td>${p.category_name || 'Без категорії'}</td>
+                <td>${p.client || '—'}</td>
                 <td class="actions-cell">
                     <button type="button" class="btn-edit" onclick="fillForm('project', '${p.id}')">Редагувати</button>
                     <button type="button" class="btn-delete" onclick="removeItem('/api/projects/${p.id}')">Видалити</button>
@@ -103,6 +104,10 @@ function fillForm(type, id) {
 
     if (type === 'project') {
         document.getElementById('project-category').value = item.category_id || '';
+        document.getElementById('project-client').value = item.client || '';
+        document.getElementById('project-tags').value = item.tags || '';
+        document.getElementById('project-link').value = item.project_link || '';
+        document.getElementById('project-description').value = item.description || '';
     } else {
         document.getElementById('post-tag').value = item.tag || '';
         document.getElementById('post-content').value = item.content || '';
@@ -131,7 +136,11 @@ document.getElementById('project-form')?.addEventListener('submit', async (e) =>
     const body = {
         title: document.getElementById('project-title').value.trim(),
         category_id: categoryVal ? Number(categoryVal) : null,
-        image_url: document.getElementById('project-image').value.trim()
+        client: document.getElementById('project-client').value.trim(),
+        tags: document.getElementById('project-tags').value.trim(),
+        image_url: document.getElementById('project-image').value.trim(),
+        project_link: document.getElementById('project-link').value.trim(),
+        description: document.getElementById('project-description').value.trim()
     };
     if (await api(id ? `/api/projects/${id}` : '/api/projects', id ? 'PUT' : 'POST', body)) {
         resetForm('project');
