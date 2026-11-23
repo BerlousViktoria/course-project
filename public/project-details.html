@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Деталі проєкту — Interno</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/project-details.css">
+</head>
+<body>
+    <div class="grid-lines">
+        <div class="line-col"></div>
+        <div class="line-col"></div>
+        <div class="line-col"></div>
+    </div>
+
+    <header class="main-header d-flex">
+        <div class="navbar content-wrap d-flex">
+            <div class="logo d-flex item-center">
+                <a href="index.html">
+                    <svg width="34" height="34"><use href="assets/images/icons/sprite.svg#logo"></use></svg>
+                </a>
+                <span>Interno</span> 
+            </div> 
+            <div id="iconBlock" class="menu-icon d-flex">
+                <div id="iconOpen" class="menu-icon-open"><i class="fa-solid fa-bars"></i></div>
+                <div id="iconClose" class="menu-icon-close d-none"><i class="fa-solid fa-xmark"></i></div>
+            </div>     
+            <ul id="mainMenu" class="main-menu d-flex item-center">
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="404.html">Сторінки</a></li>
+                <li><a href="services.html">Сервіси</a></li> 
+                <li><a href="projects.html">Проєкти</a></li>
+                <li><a href="blog.html">Блог</a></li>
+                <li><a href="contact.html">Контакти</a></li>
+                <li><a href="#">
+                    <svg width="23" height="23"><use href="assets/images/icons/sprite.svg#search-icon"></use></svg>
+                </a></li>
+            </ul>     
+        </div>
+    </header>
+
+    <main>
+        <section class="project-hero-banner"></section>
+
+        <section class="project-details content-wrap">
+            <div class="project-details-top d-flex">
+                <aside class="project-meta-card">
+                    <div class="meta-row d-flex">
+                        <span class="meta-label">Клієнт</span>
+                        <span class="meta-value" id="projectClient">—</span>
+                    </div>
+                    <div class="meta-row d-flex">
+                        <span class="meta-label">Категорія</span>
+                        <span class="meta-value" id="projectCategory">—</span>
+                    </div>
+                    <div class="meta-row d-flex">
+                        <span class="meta-label">Теги</span>
+                        <span class="meta-value" id="projectTags">—</span>
+                    </div>
+                    <div class="meta-row d-flex">
+                        <span class="meta-label">Дата</span>
+                        <span class="meta-value" id="projectDate">—</span>
+                    </div>
+                    <div class="meta-row d-flex">
+                        <span class="meta-label">Посилання</span>
+                        <a href="#" target="_blank" rel="noopener" class="meta-value meta-link" id="projectLink">—</a>
+                    </div>
+                </aside>
+
+                <article class="project-description-block">
+                    <h1 class="project-details-title" id="projectTitle">Завантаження...</h1>
+                    <div class="project-details-text" id="projectDescription"></div>
+                </article>
+            </div>
+
+            <div class="project-gallery-box">
+                <img src="" alt="" id="projectImage" class="project-gallery-img">
+                <button type="button" class="project-zoom-btn" id="zoomBtn" aria-label="Збільшити фото">
+                    <svg width="26" height="26"><use href="assets/images/icons/sprite.svg#search-icon"></use></svg>
+                </button>
+            </div>
+        </section>
+
+        <section class="prefooter content-wrap">
+            <div class="footer-top d-flex">
+                <div class="footer-column footer-column--info d-flex">
+                    <a href="index.html" class="footer-logo">
+                        <svg width="34" height="34"><use href="assets/images/icons/sprite.svg#logo"></use></svg>
+                        <span>Interno</span>
+                    </a>
+                    <p class="footer-description">
+                        Створюємо сучасні та затишні простори, де кожна деталь підкреслює вашу індивідуальність.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/?locale=uk_UA" target="_blank">
+                            <svg width="10" height="18" class="social-icon"><use href="assets/images/icons/sprite.svg#facebook-icon"></use></svg>
+                        </a>
+                        <a href="https://x.com/?lang=uk" target="_blank">
+                            <svg width="18" height="15" class="social-icon"><use href="assets/images/icons/sprite.svg#twitter-icon"></use></svg>
+                        </a>
+                        <a href="https://ua.linkedin.com/" target="_blank">
+                            <svg width="16" height="16" class="social-icon"><use href="assets/images/icons/sprite.svg#linkedin-icon"></use></svg>
+                        </a>
+                        <a href="https://www.instagram.com/" target="_blank">
+                            <svg width="17" height="17" class="social-icon"><use href="assets/images/icons/sprite.svg#instagram-icon"></use></svg>
+                        </a>
+                    </div>
+                </div> 
+
+                <div class="footer-column d-flex">
+                    <h3 class="footer-title">Сторінки</h3>
+                    <ul class="footer-nav">
+                        <li><a href="404.html">Про нас</a></li>
+                        <li><a href="projects.html">Наші проєкти</a></li>
+                        <li><a href="404.html">Наша команда</a></li>
+                        <li><a href="contact.html">Контакти</a></li>
+                        <li><a href="services.html">Послуги</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column d-flex">
+                    <h3 class="footer-title">Сервіси</h3>
+                    <ul class="footer-nav">
+                        <li><a href="404.html">Кухня</a></li>
+                        <li><a href="404.html">Житловий простір</a></li>
+                        <li><a href="404.html">Ванна кімната</a></li>
+                        <li><a href="404.html">Столова</a></li>
+                        <li><a href="404.html">Спальня</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-column--contact d-flex">
+                    <h3 class="footer-title">Контакти</h3>
+                    <address class="footer-contact-info">
+                        <p>вул. Іст Берчвуд Авеню, 55, Бруклін, Нью-Йорк, 11201</p>
+                        <p><a href="mailto:contact@interno.com">contact@interno.com</a></p>
+                        <p><a href="tel:+380504567890">+380 (50) 456-78-90</a></p>
+                    </address>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer-copyright">
+            <div class="copyright-container content-wrap">
+                <p class="copyright-text">
+                    Copyright © Interno | Designed by - Powered by Webflow
+                </p>
+            </div>
+        </footer>
+    </main>
+
+    <div class="lightbox-overlay d-none" id="lightboxOverlay">
+        <img src="" alt="" id="lightboxImg">
+    </div>
+
+    <script src="assets/js/project-details.js"></script>
+    <script src="assets/js/main.js" defer></script>
+</body>
+</html>
