@@ -26,10 +26,14 @@ router.post('/login', async (req, res) => {
 
 router.post('/register', async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, inviteCode } = req.body;
 
         if (!email || !password) {
             return res.status(400).json({ error: 'Введіть email та пароль' });
+        }
+
+        if (inviteCode !== process.env.ADMIN_INVITE_CODE) {
+            return res.status(403).json({ error: 'Невірний код доступу адміністратора' });
         }
 
         if (password.length < 6) {
