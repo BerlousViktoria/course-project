@@ -66,6 +66,7 @@ async function loadAll() {
         postsBody.innerHTML = posts.map(p => `
             <tr>
                 <td>${p.id}</td>
+                <td><img src="${p.image_url}" class="table-thumb"></td>
                 <td>${p.title}</td>
                 <td>${p.tag || '—'}</td>
                 <td>${new Date(p.created_at).toLocaleDateString('uk-UA')}</td>
