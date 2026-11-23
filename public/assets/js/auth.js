@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('auth-submit-btn');
     const toggleBtn = document.getElementById('toggle-auth-mode');
     const passwordInput = document.getElementById('password');
+    const inviteGroup = document.getElementById('invite-code-group');
+    const inviteInput = document.getElementById('invite-code');
 
     let isRegisterMode = false;
 
@@ -35,11 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.textContent = 'Зареєструватися';
                 toggleBtn.textContent = 'Вже є акаунт? Увійти';
                 passwordInput.autocomplete = 'new-password';
+                inviteGroup.style.display = 'block';
+                inviteInput.required = true;
             } else {
                 titleEl.textContent = 'Вхід в систему';
                 submitBtn.textContent = 'Увійти';
                 toggleBtn.textContent = 'Створити адміністратора';
                 passwordInput.autocomplete = 'current-password';
+                inviteGroup.style.display = 'none';
+                inviteInput.required = false;
+                inviteInput.value = '';
             }
         });
 
@@ -51,12 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('email').value.trim();
             const password = passwordInput.value;
             const endpoint = isRegisterMode ? '/api/auth/register' : '/api/auth/login';
+            const payload = isRegisterMode
+                ? { email, password, inviteCode: inviteInput.value.trim() }
+                : { email, password };
 
             try {
                 const res = await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
+                    body: JSON.stringify(payload)
                 });
 
                 const data = await res.json();
@@ -71,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = 'admin.html';
                 } else if (isRegisterMode) {
                     errorBox.style.color = '#2e7d32';
-                    errorBox.textContent = 'Адміністратора створено.';
+                    errorBox.textContent = 'Адміністратора створено. Підтвердіть email або увійдіть.';
                     toggleBtn.click();
                 }
             } catch (err) {
