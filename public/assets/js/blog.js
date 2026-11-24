@@ -32,7 +32,7 @@ function renderBlog(page) {
         </h3>
         <div class="blog-card-footer d-flex item-center">
           <time datetime="${post.created_at}" class="subtitle">${date}</time>
-          <a href="404.html" class="icon-link d-flex item-center">
+          <a href="404.html" class="icon-link d-flex item-center" aria-label="Перейти до Статті">
             <svg width="10" height="18"><use href="assets/images/icons/sprite.svg#arrow-right-icon"></use></svg>
           </a>
         </div>

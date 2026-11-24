@@ -3,7 +3,7 @@
 /* Hero Section */
 .hero{
     height: calc(100vh - 50px);
-    background-image: url('../images/header-bg.jpg');
+    background-image: url('../images/header-bg.webp');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
