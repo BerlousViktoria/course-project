@@ -142,6 +142,10 @@
         flex-direction: column;
     }
 
+    .project-details{
+        padding: 60px 20px;
+    }
+
     .project-meta-card {
         width: 100%;
     }
