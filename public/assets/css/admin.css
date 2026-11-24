@@ -167,11 +167,11 @@ body {
     margin-bottom: 28px;
 }
 
-.admin-card h2 {
+.admin-card h1, h2 {
     margin: 0 0 22px;
     font-family: var(--font-family-heading);
     font-size: 28px;
-    font-weight: 400;
+    font-weight: bold;
     color: var(--color-dark);
 }
 
