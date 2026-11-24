@@ -119,12 +119,16 @@ ul{
     position: absolute;
     top: 50px;
     right: 2000px;
-    height: calc(100vh - 50px);
-    width: 100vw;
+    height: auto;
+    width: 100%;
+    padding: 28px 20px;
+    justify-content: flex-start;
     flex-direction: column;
-    background-color:var(--color-bright);
+    background-color: var(--color-bright);
     color: var(--color-dark);
-    z-index: 1;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    z-index: 100;
 }
 .main-menu.menu-open{
     left: 0;
@@ -455,8 +459,11 @@ ul{
         flex-direction: row;
         width: auto;
         height: auto;
+        padding: 0;
         gap: 40px;
         background-color: transparent;
+        border-radius: 0;
+        box-shadow: none;
     }
 
     .main-menu li:not(:last-child) {

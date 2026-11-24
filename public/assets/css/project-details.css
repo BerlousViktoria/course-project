@@ -150,3 +150,13 @@
         height: 420px;
     }
 }
+
+@media (min-width: 992px) {
+    .project-gallery-box{
+        margin-bottom: 200px;
+    }
+
+    .project-details{
+        padding-bottom: 0;        
+    }
+}
